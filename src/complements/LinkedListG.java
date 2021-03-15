@@ -1,5 +1,7 @@
 package complements;
 
+import java.rmi.server.UnicastRemoteObject;
+
 import static complements.Position.BEFORE;
 import static complements.Position.AFTER;
 
@@ -109,6 +111,36 @@ public class LinkedListG<G>{
         return currentNode.data;
     }
 
+
+    public void insert(G data,Position position,Iterator it){
+        Node<G> newNode = new Node<>(data);
+        Node<G> currentNode = it.getCurrentNode();
+
+        if(position == AFTER) {
+            newNode.next = currentNode.next;
+            newNode.previous = currentNode;
+            currentNode.next = newNode;
+            if (newNode.next != null) {
+                newNode.previous.next = newNode;
+            } else {
+                tail = newNode;
+            }
+        }else if(position == BEFORE){
+            newNode.previous = currentNode.previous;
+            newNode.next = currentNode;
+            currentNode.previous = newNode;
+            if(newNode.previous != null){
+                newNode.previous.next = newNode;
+            }else{
+                head = newNode;
+            }
+        }else{
+            System.out.println("No se encuentra el valor de posicion ");
+        }
+        size++;
+    }
+
+
     public void delete(int index){
         Node<G> currentNode = head;
         int currentIndex = 0;
@@ -136,7 +168,7 @@ public class LinkedListG<G>{
 
 
         if(index > 0 && index < size){
-            while( currentIndex < index){
+           while( currentIndex < index){
                 currentNode = currentNode.next;
                 currentIndex++;
             }
@@ -147,25 +179,6 @@ public class LinkedListG<G>{
 
     public Iterator getIterator(){
         return new Iterator();
-    }
-
-    public void insert(G data,Position position,Iterator it){
-        Node<G> newNode = new Node<>(data);
-        Node<G> currentNode = it.getCurrentNode();
-
-        if(position == AFTER){
-            newNode.next = currentNode.next;
-            newNode.previous = currentNode.previous;
-            currentNode.next = newNode;
-            if(newNode.next != null){
-                newNode.previous.next = newNode;
-            }else{
-                head = newNode;
-            }
-        }else{
-            System.out.println("No se reconoce el valor de position ");
-        }
-        size++;
     }
 
     public int getSize() {

@@ -6,6 +6,7 @@ public class Main{
     public static void main(String []args) {
         LinkedListG<Integer> lista1 = new LinkedListG<>();
         LinkedListG<String> lista2 = new LinkedListG<>();
+        LinkedListG<Float> lista3 = new LinkedListG<>();
 
         lista1.add(1);
         lista1.add(2);
@@ -17,11 +18,16 @@ public class Main{
         lista2.add("Oriented");
         lista2.add("Programing");
 
+        lista3.add(3.25F);
+        lista3.add(2.90F);
+        lista3.add(45.10F);
+        lista3.add(90.29F);
+
         LinkedListG<Integer>.Iterator it = lista1.getIterator();
 
         while (it.hasNext()) {
             LinkedListG<Integer>.Iterator backupIt = lista1.new Iterator(it);
-            int element = it.next(); //regresa el dato y vanza al iterador
+            int element = it.next(); //regresa el dato y avanza al iterador
             if (element == 3) {
                 lista1.insert(10, Position.BEFORE, backupIt);
             }
@@ -30,7 +36,6 @@ public class Main{
             }
         }
 
-        lista1.delete(3);
 
         System.out.println("--------------------------------");
 
@@ -43,9 +48,13 @@ public class Main{
             System.out.println("Dato: " + element);
         }
 
+        lista1.delete(3);
+
         System.out.println("-----------------------------");
 
         LinkedListG<Integer>.ReverseIterator reverseIterator = lista1.getReverseIterator();
+
+        System.out.println("El tamaño despues de eliminar: " + lista1.getSize());
 
         while (reverseIterator.hasNext()) {
             int element = reverseIterator.next();
@@ -56,8 +65,37 @@ public class Main{
         System.out.println("----------------------------");
 
         LinkedListG<String>.Iterator itStrings = lista2.getIterator();
+        System.out.println("El tamaño es: " + lista2.getSize());
         while (itStrings.hasNext()) {
-            System.out.println("Cual dato?:" + itStrings.next());
+            System.out.println("Dato:" + itStrings.next());
+        }
+
+        System.out.println("----------------------------");
+
+        LinkedListG<String>.ReverseIterator reverseIterator2 = lista2.getReverseIterator();
+
+        while (reverseIterator2.hasNext()) {
+            String name = reverseIterator2.next();
+
+            System.out.println("Dato: " + name);
+        }
+
+        System.out.println("----------------------------");
+
+        LinkedListG<Float>.Iterator itFloat = lista3.getIterator();
+        System.out.println("El tamaño es: " + lista3.getSize());
+        while (itFloat.hasNext()) {
+            System.out.println("Dato:" + itFloat.next());
+        }
+
+        System.out.println("----------------------------");
+
+        LinkedListG<Float>.ReverseIterator reverseIterator3 = lista3.getReverseIterator();
+
+        while (reverseIterator3.hasNext()) {
+            Float date = reverseIterator3.next();
+
+            System.out.println("Dato: " + date);
         }
 
     }
